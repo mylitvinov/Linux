@@ -69,6 +69,62 @@ last - последние логины
 
 ====================================================
 
+создаем пользователя
+
+sudo useradd -m maxim
+
+Пароль
+
+sudo passwd maxim
+
+/etc/skel/ - "скелет" домашней директории пользователя, содержимое директории user
+
+удалить user
+
+sudo userdel -r nameuser
+
+sudo groupadd nameGroup - Добавить группу
+sudo groupdel nameGroup - удалить группу
+
+/etc/group/ посмотреть все группы
+
+Добавить user в группу
+
+sudo usermod -aG nameGroup nameUser
+
+sudo usermod -aG sudo nameUser - добавить в sudo группу
+
+Удалить user из группы
+sudo deluser nameUser nameGroup
+
+=================================================================
+
+chwon - изменить владельца файла/директории
+
+chgrp - изменить группу файла/директории
+
+chmod - изменить права доступа на файл/диреторию
+
+chmod ugo+x nameFile - добавить всем права исполнения
+
+chmod o-x nameFile - забрать права у о
+
+=========================================================
+
+Сеть
+
+ifconfig
+
+ip a
+
+ip addr show
+
+route
+
+
+
+
+
 
 
 
