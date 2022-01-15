@@ -131,7 +131,14 @@ wget url - скачиваем что-то по url
 
 =====================================================
 
+echo "Please enter your name"
+read name
 
+or
+
+read -p "Please enter your name" name
+
+=================================================
 
 
 
