@@ -140,6 +140,117 @@ read -p "Please enter your name" name
 
 =================================================
 
+Работа с дисками
+
+fdisk -l - показать диски
+
+lsblk - удобный вид отображения дисков
+
+cfdisk /dev/sdb - редактировать разделы sdb диска
+
+mkfs.ntfs -f /dev/sdb1 - форматировать раздел в ntfs систему 
+
+/etc/fstab - прописываем диски системы, добавляем
+
+mount /media/hdd2 - присоединяем диск, прописанный в файле fstab с именем hdd2
+
+========================================================
+
+hostname - имя компьютера
+
+/etc/hostname
+
+/etc/hosts
+
+ifconfig - сетевые настройки
+
+/etc/network/interfaces
+
+/etc/netplan/*.yaml
+
+Определите все доступные сетевые интерфейсы используя команду ip или lshw:
+
+sudo ip a
+// Или
+sudo lshw -class network
+
+Отредактируйте файл конфигурации netplan который находится в директории /etc/netplan/:
+
+sudo nano /etc/netplan/00-installer-config.yaml
+
+addresses — ip адрес который будет назначен вашей сетевой карте.
+gateway4 — ip адрес вашего роутера.
+nameservers — DNS сервера. Первый - наш роутер.
+search — домен в котором будет произведен поиск. Домен можно настроить при помощи DNS сервера
+Мои настройки:
+
+network:
+ ethernets:
+  enp0s3:
+   addresses:
+    - 192.168.0.105/24
+   gateway4: 192.168.0.1
+   nameservers:
+    addresses: [192.168.0.1, 8.8.4.4]
+   optional: true
+ version: 2
+ renderer: networkd
+
+ Настройки беспроводной сети
+Для корректной работы беспроводного интерфейса вам потребуется установить утилиту WPA supplicant, которая позволяет подключиться к точкам доступа с WPA. WPA и WPA2:
+
+sudo apt install wpasupplicant
+Добавьте новый файл конфигурации в каталог /etc/netplan/:
+
+sudo vim /etc/netplan/01-config.yaml
+Отредактируйте файл конфигурации беспроводной сети с динамическим ip-адресом (DHCP):
+
+network:
+ version: 2
+ renderer: networkd
+ wifis:
+  wlp3s0:
+   dhcp4: yes
+   dhcp6: no
+   access-points:
+    "network_ssid_name":
+    password: "**********"
+Для беспроводной сети в которой используются статические ip-адреса подойдет следующая конфигурация:
+
+network:
+ version: 2
+ renderer: networkd
+ wifis:
+  wlp3s0:
+   dhcp4: no
+   dhcp6: no
+   addresses: [192.168.0.21/24]
+   gateway4: 192.168.0.1
+   nameservers:
+    addresses: [192.168.0.1, 8.8.8.8]
+   access-points:
+    "network_ssid_name":
+     password: "**********"
+
+====================================================================
+
+Использование netplan для генерации необходимой конфигурации:
+
+sudo netplan generate
+Для подробного вывода информации при генерации, используйте опцию --debug:
+
+sudo netplan --debug generate
+Применение конфигурации netplan:
+
+sudo netplan apply
+Для подробного вывода информации при применении, используйте опцию --debug:
+
+sudo netplan --debug apply
+
+=========================================================================
+
+
+
 
 
 
