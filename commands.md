@@ -1,5 +1,18 @@
 find /home -name *.txt
 
+find . -type f -iname "*.txt"
+
+f - тип файлы
+d - тип директория
+iname - регистр не важен
+
+find . -type f  -perm  0664 - поиск по правам
+
+find . -size +1M   -  поиск файлов больше 1 МВ
+
+
+find . -type f -not -iname "*.txt" - поиск файлов кроме "*.txt"
+
 ===================================
 
 cut -d ">" -f 3 filename.txt | sort
@@ -21,6 +34,20 @@ grep whatFind ./*
 ищет текст в файлах
 
 grep -E "[A-Za-z\.]*@[A-Za-z]*.*" filename.txt
+
+
+grep "print" main.py  -  поиск в текущей директории в файле main.py
+
+grep -n -i "print" main.py 
+
+-n - выводит номер строки, где было найдено слово
+-i - не зависит от регистра
+
+
+find . -type f -iname "*.txt" -exec grep -i -n "ma*" {} +
+
+-exec grep -i -n "ma*" {} +     - команда выполняется после выполнения команды слева
+
 ============================================
 
  перенаправление плохих результатов
