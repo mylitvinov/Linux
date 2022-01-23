@@ -163,17 +163,28 @@ bunzip2 folder.tar.bz2 - раскомпрессия
 
 ===========================================================
 
+zip -r folder.zip folderTargetName  - архивация
+
+unzip folder.zip - разархивация
+======================================================
+
 Сеть
 
-ifconfig
+ping www.google.com  - проверка связи до хоста  ( -с 10    - раз)
 
-ip a
+host www.google.com - проверяем ip адреса доменного имени
+
+netstat - просмотр соединений открытых на компе в данный момент
+
+netstat | grep localhost
+
+ifconfig  - иг=нформация настройки сети
 
 ip addr show
 
-route
+ip a - ip адрес
 
-netstat
+route
 
 sudo ufw allow 22 - открываем порт 22
 
