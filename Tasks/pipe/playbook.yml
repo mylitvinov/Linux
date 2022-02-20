@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - shell: . ./solution.sh
+      ignore_errors: yes
+      register: result
+
+    - name: Check result
+      fail: msg="Expected 8, but was '{{result.stdout}}'"
+      when: not result.stdout or not result.stdout is match("8")
